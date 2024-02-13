@@ -4,16 +4,15 @@ import { StyleSheet, View, Text, Image } from "react-native";
 const Card = ({ data }) => {
   return (
     <View style={styles.main}>
-      <View>
-        <Image
-          source={{
-            uri: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
-          }}
-          style={styles.image}
-        />
-      </View>
-      <View>
+      <Image
+        source={{
+          uri: `https://image.tmdb.org/t/p/original/${data.backdrop_path}`,
+        }}
+        style={styles.image}
+      />
+      <View style={styles.bottom}>
         <Text style={styles.title}>{data.name}</Text>
+        <Text style={styles.description}>{data.overview}</Text>
       </View>
     </View>
   );
@@ -21,24 +20,29 @@ const Card = ({ data }) => {
 
 const styles = StyleSheet.create({
   main: {
-    borderColor: "red",
-    borderWidth: 1,
-    borderRadius: 4,
-    width: 260,
-    height: 320,
+    alignItems: "center",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    height: "100%",
+    padding: 8,
     justifyContent: "center",
-    padding: 18,
+    width: "100%",
+  },
+  bottom: {
+    height: "55%",
   },
   title: {
     color: "white",
+    fontSize: 24,
+  },
+  description: {
+    color: "grey",
     fontSize: 16,
   },
   image: {
-    width: 250,
-    height: 200,
+    height: "50%",
+    resizeMode: "contain",
+    width: "100%",
   },
 });
 

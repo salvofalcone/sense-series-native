@@ -4,6 +4,7 @@ import { StyleSheet, Text, ScrollView, View } from "react-native";
 //Components
 import SearchBar from "../component/searchBar/searchBar";
 import Card from "../component/card/card";
+import Swiper from "react-native-swiper";
 
 const Home = () => {
   const options = {
@@ -28,34 +29,46 @@ const Home = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.main}>
+    <View style={styles.main}>
       <SearchBar />
-      <Text style={styles.title}>Top rated</Text>
-      <View style={styles.cardsContainer}>
-        {data && data.map((el, index) => <Card data={el} key={index} />)}
+      <Text style={styles.title}>Top rated series</Text>
+      <View style={styles.swiperContainer}>
+        <Swiper
+          style={styles.swiper}
+          showsButtons={false}
+          showsPagination={false}
+          loop={true}
+          autoplay={true}
+          autoplayTimeout={3}>
+          {data &&
+            data.map((el, index) => (
+              <View style={styles.slide} key={index}>
+                <Card data={el} />
+              </View>
+            ))}
+        </Swiper>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
     backgroundColor: "#000",
+    paddingTop: 60,
     width: "100%",
     height: "100%",
-    flex: 1,
     padding: 18,
   },
   title: {
     color: "#fff",
     fontSize: 24,
   },
-  cardsContainer: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "start",
-    alignItems: "start",
+  swiperContainer: { height: "60%" },
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
