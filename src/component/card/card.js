@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     height: "55%",
   },
   title: {
-    color: "white",
+    color: "#000",
     fontSize: 24,
   },
   description: {
