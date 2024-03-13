@@ -39,7 +39,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer style={{ backgroundColor: "#000" }}>
+    <NavigationContainer style={{ backgroundColor: "#101415" }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
@@ -54,10 +54,10 @@ export default function App() {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarStyle: {
-            backgroundColor: "#222",
+            backgroundColor: "#101415",
             display: "flex",
           },
-          tabBarActiveTintColor: Colors.orange,
+          tabBarActiveTintColor: "#eb3d00",
           tabBarInactiveTintColor: "gray",
           headerShown: false,
         })}>

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 //Components
 import Card from "../component/card/card";
 import Swiper from "react-native-swiper";
-
-//Styles
-import { Colors } from "../utils/Colors";
 
 const Trending = () => {
   const [data, setData] = useState([]);
@@ -28,25 +25,25 @@ const Trending = () => {
       .then((response) => response.json())
       .then((response) => setData(response.results))
       .catch((err) => console.error(err));
+
+    console.log(data[3]);
   }, []);
 
   return (
     <View style={styles.main}>
-      <Text style={styles.title}>Top rated series</Text>
-      <View style={styles.list}>
-        {data &&
-          data.map((el, index) => (
-            <TouchableOpacity
-              key={index + 1}
-              onPress={() => {
-                console.log(el.name);
-              }}>
-              <View style={styles.listItem} key={index + 1}>
-                <Text>{index + 1}</Text>
-                <Text>{el.name}</Text>
+      <View style={styles.swiperContainer}>
+        <Swiper
+          style={styles.swiper}
+          showsButtons={false}
+          showsPagination={false}
+          loop={true}>
+          {data &&
+            data.map((el, index) => (
+              <View style={styles.slide} key={index}>
+                <Card data={el} />
               </View>
-            </TouchableOpacity>
-          ))}
+            ))}
+        </Swiper>
       </View>
     </View>
   );
@@ -55,22 +52,18 @@ const Trending = () => {
 const styles = StyleSheet.create({
   main: {
     backgroundColor: "#fff",
-    paddingTop: 60,
+    color: "#ffe",
     width: "100%",
     height: "100%",
-    padding: 18,
   },
-  list: {},
-  listItem: {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    gap: 10,
-    height: 48,
+  swiperContainer: {
+    width: "100%",
+    height: "100%",
   },
-  title: {
-    color: "#000",
-    fontSize: 24,
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -4,9 +4,6 @@ import { StyleSheet, View, Text } from "react-native";
 //Components
 import SearchBar from "../component/searchBar/searchBar";
 
-//Styles
-import { Colors } from "../utils/Colors";
-
 const Search = () => {
   return (
     <View style={styles.main}>
@@ -17,18 +14,18 @@ const Search = () => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: Colors.dark_background,
-    width: "100vh",
-    height: "100%",
-    flex: 1,
     alignItems: "center",
+    backgroundColor: "#fff",
+    color: "#ffe",
+    flex: 1,
+    height: "100%",
     justifyContent: "center",
   },
   title: {
     color: "#fff",
     fontSize: 30,
-    textTransform: "uppercase",
     letterSpacing: 10,
+    textTransform: "uppercase",
   },
 });
 
