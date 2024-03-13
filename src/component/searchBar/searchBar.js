@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, TextInput, ScrollView } from "react-native";
+import { StyleSheet, View, TextInput, ScrollView, Button } from "react-native";
 
 //Components
 import HorizontalCard from "../card/horizontalCard";
+import CustomButton from "../button/Button";
 
 //Utils
 import { Feather } from "@expo/vector-icons";
+import Card from "../card/card";
 
 const SearchBar = () => {
-  const [inputText, setInputText] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  const handleInputChange = (text) => {
-    setInputText(text);
-  };
-
+  //TODO: move this outside
   const options = {
     method: "GET",
     headers: {
@@ -24,6 +20,21 @@ const SearchBar = () => {
     },
   };
 
+  const [inputText, setInputText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const handleInputChange = (text) => {
+    setInputText(text);
+  };
+
+  const handleCardClick = (cardData) => {
+    setSelectedCard(cardData);
+    setShowDetails(true);
+  };
+
+  //This useEffect listens to the modifies of input text and fetch data with that query
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/search/tv?query=${inputText}&include_adult=false&language=en-US&page=1`,
@@ -33,6 +44,14 @@ const SearchBar = () => {
       .then((response) => setSearchResults(response.results))
       .catch((err) => console.error(err));
   }, [inputText]);
+
+  //This useEffect listents to the selected card (clicked by user)
+  useEffect(() => {
+    if (selectedCard) {
+      // navigation.navigate("CardDetailsScreen", { cardData: selectedCard });
+      console.log(selectedCard);
+    }
+  }, [selectedCard]);
 
   return (
     <View style={styles.main}>
@@ -49,16 +68,31 @@ const SearchBar = () => {
       <ScrollView style={styles.displayContainer}>
         {searchResults &&
           searchResults.map((el, index) => (
-            <HorizontalCard data={el} key={index} />
+            <HorizontalCard
+              data={el}
+              key={index}
+              onCardClick={handleCardClick}
+            />
           ))}
       </ScrollView>
+
+      {showDetails && (
+        <View style={styles.cardContainer}>
+          <View style={styles.cardContainer__Button}>
+            <CustomButton onPress={() => setShowDetails(false)} title="x" />
+          </View>
+          <View>
+            <Card data={selectedCard} />
+          </View>
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
-    alignItems: "flex-start",
+    alignItems: "center",
     display: "flex",
     flexDirection: "column",
     height: "100%",
@@ -66,6 +100,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 140,
     width: "100%",
+    position: "relative",
   },
 
   //searchBar's style
@@ -94,10 +129,26 @@ const styles = StyleSheet.create({
   displayContainer: {
     width: "100%",
   },
-
   displayText: {
     fontSize: 16,
     color: "black",
+  },
+
+  //card
+  cardContainer: {
+    height: "100%",
+    position: "absolute",
+    backgroundColor: "#fff",
+    top: 0,
+    left: 10,
+    width: "100%",
+  },
+
+  cardContainer__Button: {
+    position: "absolute",
+    right: 12,
+    top: 12,
+    zIndex: 1,
   },
 });
 

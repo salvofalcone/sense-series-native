@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 
 const Card = ({ data }) => {
   return (
     <View style={styles.main}>
       <Image
         source={{
-          uri: `https://image.tmdb.org/t/p/original/${data.backdrop_path}`,
+          uri: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
         }}
         style={styles.image}
       />
@@ -33,7 +33,9 @@ const Card = ({ data }) => {
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.descriptionTitle}>Plot summary:</Text>
-        <Text style={styles.description}>{data.overview}</Text>
+        <ScrollView>
+          <Text style={styles.description}>{data.overview}</Text>
+        </ScrollView>
       </View>
     </View>
   );
@@ -51,8 +53,8 @@ const styles = StyleSheet.create({
 
   image: {
     borderRadius: 40,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
+    // borderTopLeftRadius: 0,
+    // borderTopRightRadius: 0,
     height: "55%",
     resizeMode: "cover",
     width: "100%",
@@ -79,9 +81,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "#000",
+    color: "#222222",
     fontSize: 24,
     fontWeight: "500",
+    textTransform: "uppercase",
     letterSpacing: 0.5,
   },
 
@@ -96,11 +99,14 @@ const styles = StyleSheet.create({
     gap: "4px",
   },
   infoName: {
-    fontWeight: "600",
+    color: "#eb3d00f7",
+    fontWeight: "500",
+    fontSize: 12,
   },
   infoValue: {
-    fontWeight: "600",
+    fontWeight: "500",
     color: "gray",
+    fontSize: 12,
   },
 
   //Description
@@ -109,6 +115,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   descriptionTitle: {
+    color: "#eb3d00f7",
     fontSize: 16,
     fontWeight: "700",
   },

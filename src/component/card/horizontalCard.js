@@ -1,25 +1,27 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
-const HorizontalCard = ({ data }) => {
+const HorizontalCard = ({ data, onCardClick }) => {
   return (
-    <View style={styles.main}>
-      <Image
-        source={{
-          uri: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
-        }}
-        style={styles.image}
-      />
-      <View style={styles.info}>
-        <Text style={styles.infoTitle}>{data.name}</Text>
-        <Text
-          style={styles.infoOverview}
-          numberOfLines={4}
-          ellipsizeMode="tail">
-          {data.overview ? data.overview : "No description available"}
-        </Text>
+    <TouchableOpacity onPress={() => onCardClick(data)}>
+      <View style={styles.main} onPress={() => onCardClick(data)}>
+        <Image
+          source={{
+            uri: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
+          }}
+          style={styles.image}
+        />
+        <View style={styles.info}>
+          <Text style={styles.infoTitle}>{data.name}</Text>
+          <Text
+            style={styles.infoOverview}
+            numberOfLines={4}
+            ellipsizeMode="tail">
+            {data.overview ? data.overview : "No description available"}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
