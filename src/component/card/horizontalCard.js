@@ -7,7 +7,7 @@ const HorizontalCard = ({ data, onCardClick }) => {
       <View style={styles.main} onPress={() => onCardClick(data)}>
         <Image
           source={{
-            uri: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
+            uri: `https://image.tmdb.org/t/p/w342/${data.poster_path}`,
           }}
           style={styles.image}
         />

@@ -6,7 +6,7 @@ const Card = ({ data }) => {
     <View style={styles.main}>
       <Image
         source={{
-          uri: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
+          uri: `https://image.tmdb.org/t/p/w342/${data.poster_path}`,
         }}
         style={styles.image}
       />
@@ -53,8 +53,6 @@ const styles = StyleSheet.create({
 
   image: {
     borderRadius: 40,
-    // borderTopLeftRadius: 0,
-    // borderTopRightRadius: 0,
     height: "55%",
     resizeMode: "cover",
     width: "100%",

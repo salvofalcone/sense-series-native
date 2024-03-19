@@ -25,8 +25,6 @@ const Trending = () => {
       .then((response) => response.json())
       .then((response) => setData(response.results))
       .catch((err) => console.error(err));
-
-    console.log(data[3]);
   }, []);
 
   return (
