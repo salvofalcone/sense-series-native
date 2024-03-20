@@ -10,7 +10,6 @@ import { Feather } from "@expo/vector-icons";
 import Card from "../card/card";
 
 const SearchBar = () => {
-  //TODO: move this outside
   const options = {
     method: "GET",
     headers: {
@@ -24,6 +23,7 @@ const SearchBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (text) => {
     setInputText(text);
@@ -55,11 +55,13 @@ const SearchBar = () => {
 
   return (
     <View style={styles.main}>
-      <View style={styles.inputContainer}>
+      <View style={[styles.inputContainer, isFocused && styles.inputActive]}>
         <TextInput
           placeholder="Search for tv series"
           style={styles.input}
           onChangeText={handleInputChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           value={inputText}
         />
         <Feather name="search" size={24} color="#eb3d00" style={styles.icon} />
@@ -120,6 +122,10 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 5,
     paddingHorizontal: 10,
+  },
+  inputActive: {
+    borderColor: "orange",
+    borderWidth: 1,
   },
   icon: {
     marginLeft: 10,

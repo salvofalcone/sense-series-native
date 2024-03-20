@@ -4,7 +4,8 @@ import { StyleSheet, Text, View } from "react-native";
 const Home = () => {
   return (
     <View style={styles.main}>
-      <Text>work in progress</Text>
+      <Text style={styles.title}>React Native</Text>
+      <Text style={styles.title}>Expo</Text>
     </View>
   );
 };
@@ -20,6 +21,10 @@ const styles = StyleSheet.create({
     marginTop: 140,
     width: "100%",
     position: "relative",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
 
